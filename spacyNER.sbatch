@@ -1,11 +1,11 @@
-#!/usr/bin/bash
+#!/bin/bash
 #SBATCH --job-name=spacy
-#SBATCH --output=/home/users/%u/out/spacy.%j.out
-#SBATCH --error=/home/users/%u/err/spacy.%j.err
-#SBATCH -p hns
+#SBATCH --output=/home/%u/out/spacy.%j.out
+#SBATCH --error=/home/%u/err/spacy.%j.err
+#SBATCH -p normal
 #SBATCH -c 1
 #SBATCH --mem=32GB
-module load python/3.9.0
-pip3 install spacy
+ml python
+pip3 install --user spacy
 python3 -m spacy download en_core_web_sm
 python3 spacyNER.py

@@ -11,7 +11,7 @@ nlp = spacy.load("en_core_web_sm")
 nlp.max_length = 5000000
 
 user = os.getenv('USER')
-corpusdir = '/scratch/users/{}/corpus/'.format(user)
+corpusdir = '/farmshare/learning/data/emerson/'
 corpus = []
 for infile in os.listdir(corpusdir):
     with open(corpusdir+infile, errors='ignore') as fin:
@@ -31,7 +31,7 @@ for token in doc:
 
 # convert to pd df for analysis
 pos_df = pd.DataFrame(pos_output)
-pos_df[['word','pos_tag', 'pos']] = pos_df[0].str.split(" ", 3, expand=True)
+pos_df[['word','pos_tag','pos']] = pos_df[0].str.split(n=3, expand=True)
 pos_df = pos_df.drop(pos_df.columns[0], axis=1)
 
 #write out as csv for later use
@@ -45,7 +45,7 @@ for token in doc:
 
 # convert output to df for easier use
 ner_df = pd.DataFrame(ner_output)
-ner_df[['word','entity_type']] = ner_df[0].str.split(" ", 2, expand=True)
+ner_df[['word','entity_type']] = ner_df[0].str.split(n=3, expand=True)
 ner_df = ner_df.drop(ner_df.columns[0], axis=1)
 
 # save only rows with entity info
